@@ -8,7 +8,7 @@ const app: Application = express()
 // cors
 app.use(cors());
 
-// using router
-app.use(router);
+// using routes
+app.use('/api/v1/', router);
 
 export default app
