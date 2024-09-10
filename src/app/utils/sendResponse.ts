@@ -12,6 +12,7 @@ export function sendResponse<T>(
 ) {
   res.status(statusCode).json({
     success,
+    statusCode,
     message,
     data,
   })

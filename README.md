@@ -108,7 +108,7 @@ Calculation:
 
   
 
-1. **User Sign Up**
+✅✅✅1. **User Sign Up**
 *   **Route**: `POST /api/auth/signup`
 *   **Request Body**:
 

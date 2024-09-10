@@ -1,4 +1,4 @@
-import { model, Schema } from 'mongoose'
+import {  model, Schema } from 'mongoose'
 import { TUser } from './user.interface'
 import bcrypt from 'bcrypt'
 import config from '../../config'
@@ -16,6 +16,7 @@ const userSchema = new Schema<TUser>(
     password: {
       type: String,
       required: true,
+      select: 0
     },
     phone: {
       type: String,
@@ -31,9 +32,6 @@ const userSchema = new Schema<TUser>(
       required: true,
     },
   },
-  {
-    timestamps: true,
-  },
 )
 
 userSchema.pre('save', async function (next) {
@@ -41,9 +39,12 @@ userSchema.pre('save', async function (next) {
   next()
 })
 
-userSchema.post('save', async function (document, next) {
-    document.password="";
-    next();
-})
+
+userSchema.set('toJSON', {
+    transform: function(doc, ret) {
+        delete ret.password;
+        return ret;
+    }
+});
 
 export const UserModel = model<TUser>('User', userSchema)
