@@ -1,7 +1,7 @@
 # Sports Facility Booking Platform
 
 ## Story
-Once upon a time in a bustling city, there was Alex, a sports lover with a big dream. He wanted to create a simple way for people to book sports facilities hassle-free. With his trusty team of developers, they set out to make this dream a reality.
+✅✅✅ Once upon a time in a bustling city, there was Alex, a sports lover with a big dream. He wanted to create a simple way for people to book sports facilities hassle-free. With his trusty team of developers, they set out to make this dream a reality.
 
 Using TypeScript, Express.js, and Mongoose, they built the backbone of their platform. They created models for users, facilities, and bookings, making sure to include all the necessary details.
 
@@ -18,7 +18,7 @@ You are tasked with developing the backend for a sports facility booking platfor
 
   
 
-## Technology Stack:
+## ✅✅✅ Technology Stack:
 
 *   **Programming Language**: TypeScript
 *   **Web Framework**: Express.js

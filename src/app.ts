@@ -1,8 +1,14 @@
-import express from 'express'
+import express, { Application } from 'express'
+import router from './app/routes'
+import cors from 'cors';
 
-const app = express()
-app.get('/', (req, res) => {
-  // const a = 5;
-  res.send({message: "Server is working"})
-})
+// creating app
+const app: Application = express()
+
+// cors
+app.use(cors());
+
+// using router
+app.use(router);
+
 export default app
