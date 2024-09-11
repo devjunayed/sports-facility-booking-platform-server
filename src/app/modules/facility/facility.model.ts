@@ -24,4 +24,4 @@ const facilitySchema = new Schema<TFacility>({
   },
 })
 
-export const FacilityModel = model<TFacility>('Facility', facilitySchema)
+export const Facility = model<TFacility>('Facility', facilitySchema)

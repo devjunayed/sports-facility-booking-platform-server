@@ -33,4 +33,4 @@ const bookingSchema = new Schema<TBooking>({
   },
 })
 
-export const BookingModel = model<TBooking>('Booking', bookingSchema)
+export const Booking= model<TBooking>('Booking', bookingSchema)

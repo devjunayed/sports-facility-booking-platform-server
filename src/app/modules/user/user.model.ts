@@ -1,9 +1,9 @@
 import {  model, Schema } from 'mongoose'
-import { TUser } from './user.interface'
+import { TUser, UserModel } from './user.interface'
 import bcrypt from 'bcrypt'
 import config from '../../config'
 
-const userSchema = new Schema<TUser>(
+const userSchema = new Schema<TUser, UserModel>(
   {
     name: {
       type: String,
@@ -34,12 +34,13 @@ const userSchema = new Schema<TUser>(
   },
 )
 
+// encrypting user password
 userSchema.pre('save', async function (next) {
   this.password = await bcrypt.hash(this.password, Number(config.salt_rounds))
   next()
 })
 
-
+// removing password as result
 userSchema.set('toJSON', {
     transform: function(doc, ret) {
         delete ret.password;
@@ -47,4 +48,9 @@ userSchema.set('toJSON', {
     }
 });
 
-export const UserModel = model<TUser>('User', userSchema)
+// find user by email
+userSchema.statics.isUserExistsByEmail = async function(email: string){
+  return await User.findOne({email}).select('+password');
+}
+
+export const User = model<TUser, UserModel>('User', userSchema)
