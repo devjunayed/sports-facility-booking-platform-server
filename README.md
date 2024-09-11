@@ -140,7 +140,7 @@ Calculation:
 }
 ```
 
-2. **User Login**
+✅✅✅2. **User Login**
 *   **Route**: `POST /api/auth/login`
 *   **Request Body**:
 

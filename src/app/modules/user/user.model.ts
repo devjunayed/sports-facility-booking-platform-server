@@ -1,38 +1,36 @@
-import {  model, Schema } from 'mongoose'
+import { model, Schema } from 'mongoose'
 import { TUser, UserModel } from './user.interface'
 import bcrypt from 'bcrypt'
 import config from '../../config'
 
-const userSchema = new Schema<TUser, UserModel>(
-  {
-    name: {
-      type: String,
-      required: true,
-    },
-    email: {
-      type: String,
-      required: true,
-    },
-    password: {
-      type: String,
-      required: true,
-      select: 0
-    },
-    phone: {
-      type: String,
-      required: true,
-    },
-    role: {
-      type: String,
-      enum: ['admin', 'user'],
-      required: true,
-    },
-    address: {
-      type: String,
-      required: true,
-    },
+const userSchema = new Schema<TUser, UserModel>({
+  name: {
+    type: String,
+    required: true,
   },
-)
+  email: {
+    type: String,
+    required: true,
+  },
+  password: {
+    type: String,
+    required: true,
+    select: 0,
+  },
+  phone: {
+    type: String,
+    required: true,
+  },
+  role: {
+    type: String,
+    enum: ['admin', 'user'],
+    required: true,
+  },
+  address: {
+    type: String,
+    required: true,
+  },
+})
 
 // encrypting user password
 userSchema.pre('save', async function (next) {
@@ -42,15 +40,24 @@ userSchema.pre('save', async function (next) {
 
 // removing password as result
 userSchema.set('toJSON', {
-    transform: function(doc, ret) {
-        delete ret.password;
-        return ret;
-    }
-});
+  transform: function (doc, ret) {
+    delete ret.password
+    return ret
+  },
+})
 
 // find user by email
-userSchema.statics.isUserExistsByEmail = async function(email: string){
-  return await User.findOne({email}).select('+password');
+userSchema.statics.isUserExistsByEmail = async function (email: string) {
+  return await User.findOne({ email }).select('+password')
+}
+
+// isPasswordMatched statics methods
+userSchema.statics.isPasswordMatched = async function (
+  password: string,
+  hashedPassword: string,
+) {
+  const result = await bcrypt.compare(password, hashedPassword)
+  return result
 }
 
 export const User = model<TUser, UserModel>('User', userSchema)
