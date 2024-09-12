@@ -297,7 +297,7 @@ Authorization: Bearer JWT_TOKEN
 #### Booking Routes
 
   
-### 7\. Check Availability
+✅✅✅### 7\. Check Availability
 
 Check the availability of time slots for booking on a specific date.
 
