@@ -172,7 +172,7 @@ Calculation:
   
 
 
-3. **Create a Facility (Admin Only)**
+✅✅✅3. **Create a Facility (Admin Only)**
 *   **Route**: `POST /api/facility`
 *   **Headers**:
 
@@ -208,7 +208,7 @@ Authorization: Bearer JWT_TOKEN
 
   
 
-4. **Update a Facility (Admin Only)**
+✅✅✅4. **Update a Facility (Admin Only)**
 *   **Route**: `PUT /api/facility/:id`
 *   **Headers**:
 

@@ -1,6 +1,6 @@
 import z from 'zod'
 
-const createVacilityValidationSchema = z.object({
+const createFacilityValidationSchema = z.object({
   body: z.object({
     name: z.string({
       required_error: 'Facility name is required',
@@ -15,12 +15,37 @@ const createVacilityValidationSchema = z.object({
       invalid_type_error: 'Facility price per hour is invalid',
     }),
     location: z.string({
-        required_error: 'Facility location is required',
+      required_error: 'Facility location is required',
+      invalid_type_error: 'Facility location is invalid',
+    }),
+  }),
+})
+const updateFacilityValidationSchema = z.object({
+  body: z.object({
+    name: z
+      .string({
+        invalid_type_error: 'Facility name is invalid',
+      })
+      .optional(),
+    description: z
+      .string({
+        invalid_type_error: 'Facility description is invalid',
+      })
+      .optional(),
+    pricePerHour: z
+      .number({
+        invalid_type_error: 'Facility price per hour is invalid',
+      })
+      .optional(),
+    location: z
+      .string({
         invalid_type_error: 'Facility location is invalid',
-      }),
+      })
+      .optional(),
   }),
 })
 
 export const FacilityValidation = {
-    createVacilityValidationSchema
+  createFacilityValidationSchema,
+  updateFacilityValidationSchema,
 }

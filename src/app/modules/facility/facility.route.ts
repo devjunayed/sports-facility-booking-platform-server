@@ -6,11 +6,26 @@ import { FacilityValidation } from './facility.validation'
 
 const router = express.Router()
 
+// Creating Facility
 router.post(
   '/',
   auth('admin'),
-  validateRequest(FacilityValidation.createVacilityValidationSchema),
+  validateRequest(FacilityValidation.createFacilityValidationSchema),
   FacilityController.createFacility,
+)
+// updating Facility
+router.put(
+  '/:id',
+  auth('admin'),
+  validateRequest(FacilityValidation.updateFacilityValidationSchema),
+  FacilityController.updateFacility,
+)
+
+// soft deleting facility
+router.delete(
+  '/:id',
+  auth('admin'),
+  FacilityController.deleteFacility,
 )
 
 export const FacilityRoutes = router
