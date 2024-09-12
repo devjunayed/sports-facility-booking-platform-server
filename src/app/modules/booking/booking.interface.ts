@@ -7,5 +7,10 @@ export type TBooking = {
     user: Types.ObjectId;
     facility: string;
     payableAmount: number;
-    isBooked: boolean;
+    isBooked: 'confirmed' | 'canceled';
+}
+
+export type TSlot = {
+    startTime: string;
+    endTime: string;
 }
