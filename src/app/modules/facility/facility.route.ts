@@ -28,4 +28,10 @@ router.delete(
   FacilityController.deleteFacility,
 )
 
+// get all facility
+router.get(
+  '/',
+  FacilityController.getAllFacility,
+)
+
 export const FacilityRoutes = router

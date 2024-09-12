@@ -242,7 +242,7 @@ Authorization: Bearer JWT_TOKEN
 }
 ```
 
-5. **Delete a Facility - Soft Delete (Admin Only)**
+✅✅✅5. **Delete a Facility - Soft Delete (Admin Only)**
 *   **Route**: `DELETE /api/facility/:id`
 *   **Headers**:
 
