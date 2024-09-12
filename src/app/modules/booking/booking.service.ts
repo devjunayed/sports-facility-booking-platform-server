@@ -50,8 +50,14 @@ const createBookingIntoDB = async (req: Request) => {
   // checking if the slot is bookable
   const slots = await getSlot(data.date)
 
-  if (!slots.includes({ startTime: data.startTime, endTime: data.endTime })) {
-    throw new AppError(httpStatus.NOT_ACCEPTABLE, 'Slot is already taken!')
+  const slotAvailable = slots.some(
+    (slot) =>
+      slot.startTime === data.startTime && slot.endTime === data.endTime,
+  )
+
+  // throwing error if slot is not available
+  if (!slotAvailable) {
+    throw new AppError(httpStatus.NOT_ACCEPTABLE, 'Slot is not available!')
   }
 
   const result = Booking.create(data)
