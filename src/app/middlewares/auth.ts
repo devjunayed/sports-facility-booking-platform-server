@@ -17,13 +17,13 @@ const auth = (...requiredRoles: TRole[]) => {
       res.status(httpStatus.UNAUTHORIZED).json({
         success: false,
         statusCode: httpStatus.UNAUTHORIZED,
-        message: 'You have no access to this route'
+        message: 'You have no access to this route',
       })
     }
 
     // checking if the toke is valid
     const decoded = jwt.verify(
-      token,
+      token as string,
       config.jwt_access_secret as string,
     ) as JwtPayload
 
@@ -41,12 +41,12 @@ const auth = (...requiredRoles: TRole[]) => {
       res.status(httpStatus.UNAUTHORIZED).json({
         success: false,
         statusCode: httpStatus.UNAUTHORIZED,
-        message: 'You have no access to this route'
+        message: 'You have no access to this route',
       })
     }
-    req.user = decoded as JwtPayload;
-    next();
+    req.user = decoded as JwtPayload
+    next()
   })
 }
 
-export default auth;
+export default auth

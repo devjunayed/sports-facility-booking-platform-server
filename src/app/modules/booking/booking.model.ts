@@ -22,7 +22,7 @@ const bookingSchema = new Schema<TBooking>({
   facility: {
     type: String,
     required: true,
-    ref: 'Facility'
+    ref: 'Facility',
   },
   payableAmount: {
     type: Number,
@@ -34,5 +34,4 @@ const bookingSchema = new Schema<TBooking>({
   },
 })
 
-
-export const Booking= model<TBooking>('Booking', bookingSchema)
+export const Booking = model<TBooking>('Booking', bookingSchema)

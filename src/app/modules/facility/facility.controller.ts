@@ -47,5 +47,5 @@ export const FacilityController = {
   createFacility,
   updateFacility,
   deleteFacility,
-  getAllFacility
+  getAllFacility,
 }

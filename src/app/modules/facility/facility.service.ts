@@ -9,32 +9,28 @@ const createFacilityIntoDB = async (payload: TFacility) => {
 const updateFacilityFromDB = async (id: string, payload: TFacility) => {
   // updating data
   await Facility.findByIdAndUpdate(id, payload)
-  
+
   // showing updated data
   const facility = await Facility.findById(id)
   return facility
 }
 const deleteFacilityFromDB = async (id: string) => {
   // soft deleting data
-  await Facility.findByIdAndUpdate(id, {isDeleted: true})
+  await Facility.findByIdAndUpdate(id, { isDeleted: true })
 
   // showing updated data
   const facility = await Facility.findById(id)
   return facility
 }
 const getAllFacilityFromDB = async () => {
-
   // getting all facility data except deleted one
-  const result = await Facility.find({isDeleted: {$ne: true}})
-  return result;
+  const result = await Facility.find({ isDeleted: { $ne: true } })
+  return result
 }
-
-
-
 
 export const FacilityService = {
   createFacilityIntoDB,
   updateFacilityFromDB,
   deleteFacilityFromDB,
-  getAllFacilityFromDB
+  getAllFacilityFromDB,
 }

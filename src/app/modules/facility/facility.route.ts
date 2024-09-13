@@ -22,16 +22,9 @@ router.put(
 )
 
 // soft deleting facility
-router.delete(
-  '/:id',
-  auth('admin'),
-  FacilityController.deleteFacility,
-)
+router.delete('/:id', auth('admin'), FacilityController.deleteFacility)
 
 // get all facility
-router.get(
-  '/',
-  FacilityController.getAllFacility,
-)
+router.get('/', FacilityController.getAllFacility)
 
 export const FacilityRoutes = router

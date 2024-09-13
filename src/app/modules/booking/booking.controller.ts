@@ -70,5 +70,5 @@ export const BookingController = {
   createBooking,
   getAllBookings,
   getUserBookings,
-  canceleBookings
+  canceleBookings,
 }
