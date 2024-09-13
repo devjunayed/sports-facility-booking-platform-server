@@ -4,6 +4,7 @@ import cors from 'cors';
 import globalErrorHandler from './app/middlewares/globalErrorhandler';
 import { notFound } from './app/middlewares/notFound';
 
+
 // creating app
 const app: Application = express()
 
