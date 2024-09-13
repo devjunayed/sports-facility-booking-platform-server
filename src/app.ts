@@ -14,6 +14,13 @@ app.use(cors());
 // middlewares for getting data from the frontend
 app.use(express.json());
 
+// tes route
+app.get('/', (req, res) => {
+    res.json({
+        message: "Server is running"
+    })
+})
+
 // using routes
 app.use('/api/', router);
 
