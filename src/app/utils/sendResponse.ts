@@ -1,4 +1,5 @@
 import { Response } from "express"
+import httpStatus from "http-status"
 
 type TResponse<T> = {
   statusCode: number
@@ -23,5 +24,12 @@ export function sendResponse<T>(
     responseData.token = token;
   }
 
-  res.status(statusCode).json(responseData);
+  if(Array.isArray(data) && data?.length === 0 || !data){
+    responseData.data = (Array.isArray(data) ? [] : null) as T;
+    responseData.message =  "No Data Found"
+    responseData.statusCode = httpStatus.NOT_FOUND;
+    responseData.success = false;
+  }
+
+  res.status(responseData.statusCode).json(responseData);
 }

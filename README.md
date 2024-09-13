@@ -476,7 +476,7 @@ Authorization: Bearer JWT_TOKEN
 }
 ```
 
-**11\. Cancel a Booking (User Only)**
+✅✅✅**11\. Cancel a Booking (User Only)**
 
   *   **Route**: `DELETE /api/bookings/:id`
   *   **Headers**:
@@ -514,7 +514,7 @@ Authorization: Bearer JWT_TOKEN
 
 ## Bonus Part (10 Marks):
 
-### **1\. No Data Found:**
+✅✅✅### **1\. No Data Found:**
 
 When retrieving data, if the database collection is empty or no matching data is found, return the message: "No data found."
 
@@ -558,7 +558,7 @@ Implement proper error handling throughout the application. Use global error han
 
 ###   
 
-### **3\. Not Found Route:**
+✅✅✅### **3\. Not Found Route:**
 
 Implement a global "Not Found" handler for unmatched routes. When a route is not found, respond with a generic message: "Not Found.”
 
@@ -570,7 +570,7 @@ Implement a global "Not Found" handler for unmatched routes. When a route is not
 }
 ```
 
-### **4\. Authentication Middleware:**
+✅✅✅### **4\. Authentication Middleware:**
 
 Implement an Authentication Middleware to authenticate your application. Ensures that only user  and admin can access their own accessible routes.
 

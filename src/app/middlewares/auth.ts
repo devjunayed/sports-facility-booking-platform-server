@@ -14,10 +14,11 @@ const auth = (...requiredRoles: TRole[]) => {
     const token = req.headers.authorization
 
     if (!token) {
-      throw new AppError(
-        httpStatus.UNAUTHORIZED,
-        'You are not authorized to access this',
-      )
+      res.status(httpStatus.UNAUTHORIZED).json({
+        success: false,
+        statusCode: httpStatus.UNAUTHORIZED,
+        message: 'You have no access to this route'
+      })
     }
 
     // checking if the toke is valid
@@ -37,7 +38,11 @@ const auth = (...requiredRoles: TRole[]) => {
 
     // checking if the user role is allowed
     if (requiredRoles && !requiredRoles.includes(role)) {
-      throw new AppError(httpStatus.UNAUTHORIZED, 'You are not authorized!')
+      res.status(httpStatus.UNAUTHORIZED).json({
+        success: false,
+        statusCode: httpStatus.UNAUTHORIZED,
+        message: 'You have no access to this route'
+      })
     }
     req.user = decoded as JwtPayload;
     next();
