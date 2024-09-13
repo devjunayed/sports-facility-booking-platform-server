@@ -74,15 +74,26 @@ const getAllBookingsFromDB = async () => {
 
 // getting user bookings
 const getUserBookingsFromDB = async (req: Request) => {
-  const user= await User.isUserExistsByEmail(req?.user?.email);
-
+  const user = await User.isUserExistsByEmail(req?.user?.email)
 
   const result = await Booking.find({ user: user._id }).populate('facility')
-  return result;
+  return result
 }
+
+// cancel bookings
+const canceleBookingsIntoDB = async (bookingId: string) => {
+   await Booking.findByIdAndUpdate(bookingId, {
+    isBooked: 'canceled',
+  })
+  
+  const result = await Booking.findById(bookingId).populate('facility')
+  return result
+}
+
 export const BookingService = {
   checkAvailabilityFromDb,
   createBookingIntoDB,
   getAllBookingsFromDB,
   getUserBookingsFromDB,
+  canceleBookingsIntoDB,
 }

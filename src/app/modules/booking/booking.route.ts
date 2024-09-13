@@ -16,4 +16,7 @@ router.get('/bookings', auth('admin'), BookingController.getAllBookings)
 // get user bookings
 router.get('/bookings/user', auth('user'), BookingController.getUserBookings)
 
+// get user bookings
+router.delete('/bookings/:id', auth('user'), BookingController.canceleBookings)
+
 export const BookingRoutes = router

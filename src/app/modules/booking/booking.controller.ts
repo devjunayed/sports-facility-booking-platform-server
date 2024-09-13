@@ -53,10 +53,22 @@ const getUserBookings = catchAsync(async (req, res) => {
     data: result,
   })
 })
+// cancleing user bookings in contrroller
+const canceleBookings = catchAsync(async (req, res) => {
+  const result = await BookingService.canceleBookingsIntoDB(req.params.id)
+
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatus.OK,
+    message: 'Booking cancelled successfully',
+    data: result,
+  })
+})
 
 export const BookingController = {
   checkAvailability,
   createBooking,
   getAllBookings,
-  getUserBookings
+  getUserBookings,
+  canceleBookings
 }

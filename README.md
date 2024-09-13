@@ -396,7 +396,7 @@ Authorization: Bearer JWT_TOKEN
 
 `If the facility is unavailable during the requested time slot, an error response is returned.`
 
-**9\. View All Bookings (Admin Only)**
+✅✅✅**9\. View All Bookings (Admin Only)**
 
   *   **Route**: `GET /api/bookings`
   *   **Headers**:
@@ -440,7 +440,7 @@ Authorization: Bearer JWT_TOKEN
 }
 ```
 
-**10\. View Bookings by User (User Only)**
+✅✅✅**10\. View Bookings by User (User Only)**
 
   *   **Route**: `GET /api/bookings/user`
   *   **Headers**:
