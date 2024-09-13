@@ -22,6 +22,7 @@ const bookingSchema = new Schema<TBooking>({
   facility: {
     type: String,
     required: true,
+    ref: 'Facility'
   },
   payableAmount: {
     type: Number,

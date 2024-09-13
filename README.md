@@ -358,7 +358,7 @@ GET /api/check-availability?date=2024-06-15
 
   
 
-**8\. Create a Booking (User Only)**
+✅✅✅**8\. Create a Booking (User Only)**
 
   *   **Route**: `POST /api/bookings`
   *   **Headers**:

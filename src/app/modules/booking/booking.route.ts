@@ -8,6 +8,12 @@ const router = express.Router()
 router.get('/check-availability', BookingController.checkAvailability)
 
 // creatign booking
-router.post('/bookings', auth('user'), BookingController.createBooking);
+router.post('/bookings', auth('user'), BookingController.createBooking)
 
-export const BookingRoutes = router;
+// getting all bookings
+router.get('/bookings', auth('admin'), BookingController.getAllBookings)
+
+// get user bookings
+router.get('/bookings/user', auth('user'), BookingController.getUserBookings)
+
+export const BookingRoutes = router

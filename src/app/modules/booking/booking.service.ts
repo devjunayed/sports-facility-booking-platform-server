@@ -6,6 +6,7 @@ import httpStatus from 'http-status'
 import { User } from '../user/user.model'
 import { getSlot } from './booking.utils'
 
+// check availability
 const checkAvailabilityFromDb = async (date: string) => {
   // setting booking date to the current date if no date is provided
   let bookingDate = new Date().toISOString().slice(0, 10)
@@ -19,6 +20,7 @@ const checkAvailabilityFromDb = async (date: string) => {
   return slots
 }
 
+// creating bookings
 const createBookingIntoDB = async (req: Request) => {
   const data = req.body
   data.user = req.user
@@ -64,7 +66,23 @@ const createBookingIntoDB = async (req: Request) => {
   return result
 }
 
+// getting all bookings
+const getAllBookingsFromDB = async () => {
+  const result = await Booking.find().populate('facility').populate('user')
+  return result
+}
+
+// getting user bookings
+const getUserBookingsFromDB = async (req: Request) => {
+  const user= await User.isUserExistsByEmail(req?.user?.email);
+
+
+  const result = await Booking.find({ user: user._id }).populate('facility')
+  return result;
+}
 export const BookingService = {
   checkAvailabilityFromDb,
   createBookingIntoDB,
+  getAllBookingsFromDB,
+  getUserBookingsFromDB,
 }

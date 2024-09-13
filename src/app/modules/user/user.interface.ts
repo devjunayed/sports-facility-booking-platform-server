@@ -3,6 +3,7 @@ import { Model } from "mongoose";
 
 export type TRole = 'admin' | 'user';
 export type TUser = {
+    _id?: string;
     name: string;
     email: string;
     password: string;

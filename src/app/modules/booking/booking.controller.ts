@@ -4,11 +4,11 @@ import { sendResponse } from '../../utils/sendResponse'
 import { BookingService } from './booking.service'
 import { Request } from 'express'
 
+// checking availabiliy in controllers
 const checkAvailability = catchAsync(async (req, res) => {
   const result = await BookingService.checkAvailabilityFromDb(
     req?.query?.date as string,
   )
-
 
   sendResponse(res, {
     success: true,
@@ -18,8 +18,9 @@ const checkAvailability = catchAsync(async (req, res) => {
   })
 })
 
-const createBooking = catchAsync(async(req, res) => {
-  const result = await BookingService.createBookingIntoDB(req as Request);
+// creating bookings in contrroller
+const createBooking = catchAsync(async (req, res) => {
+  const result = await BookingService.createBookingIntoDB(req as Request)
 
   sendResponse(res, {
     success: true,
@@ -29,7 +30,33 @@ const createBooking = catchAsync(async(req, res) => {
   })
 })
 
+// getting all bookings in controller
+const getAllBookings = catchAsync(async (req, res) => {
+  const result = await BookingService.getAllBookingsFromDB()
+
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatus.OK,
+    message: 'Booking retrieved successfully',
+    data: result,
+  })
+})
+
+// getting user bookings in contrroller
+const getUserBookings = catchAsync(async (req, res) => {
+  const result = await BookingService.getUserBookingsFromDB(req as Request)
+
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatus.OK,
+    message: 'Booking retrieved successfully',
+    data: result,
+  })
+})
+
 export const BookingController = {
   checkAvailability,
-  createBooking
+  createBooking,
+  getAllBookings,
+  getUserBookings
 }
