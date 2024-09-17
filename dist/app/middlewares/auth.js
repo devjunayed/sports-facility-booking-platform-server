@@ -20,7 +20,8 @@ const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const user_model_1 = require("../modules/user/user.model");
 const auth = (...requiredRoles) => {
     return (0, catchAsync_1.catchAsync)((req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-        const token = req.headers.authorization;
+        var _a;
+        const token = (_a = req.headers.authorization) === null || _a === void 0 ? void 0 : _a.split(' ')[1];
         if (!token) {
             res.status(http_status_1.default.UNAUTHORIZED).json({
                 success: false,
