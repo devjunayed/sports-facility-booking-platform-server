@@ -2,6 +2,8 @@ import { model, Schema } from 'mongoose'
 import { TUser, UserModel } from './user.interface'
 import bcrypt from 'bcrypt'
 import config from '../../config'
+import AppError from '../../errors/AppError'
+import httpStatus from 'http-status'
 
 const userSchema = new Schema<TUser, UserModel>({
   name: {
@@ -37,6 +39,17 @@ const userSchema = new Schema<TUser, UserModel>({
 userSchema.pre('save', async function (next) {
   this.password = await bcrypt.hash(this.password, Number(config.salt_rounds))
   next()
+})
+
+// checking if user already exists
+userSchema.pre('save', async function (next) {
+  // console.log(this);
+  const result = await User.findOne({ email: this.email })
+  if (result) {
+    throw new AppError(httpStatus.NOT_IMPLEMENTED, 'This email already used!')
+  } else {
+    next()
+  }
 })
 
 // removing password as result

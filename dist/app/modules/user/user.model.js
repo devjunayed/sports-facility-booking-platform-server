@@ -16,6 +16,8 @@ exports.User = void 0;
 const mongoose_1 = require("mongoose");
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const config_1 = __importDefault(require("../../config"));
+const AppError_1 = __importDefault(require("../../errors/AppError"));
+const http_status_1 = __importDefault(require("http-status"));
 const userSchema = new mongoose_1.Schema({
     name: {
         type: String,
@@ -50,6 +52,19 @@ userSchema.pre('save', function (next) {
     return __awaiter(this, void 0, void 0, function* () {
         this.password = yield bcrypt_1.default.hash(this.password, Number(config_1.default.salt_rounds));
         next();
+    });
+});
+// checking if user already exists
+userSchema.pre('save', function (next) {
+    return __awaiter(this, void 0, void 0, function* () {
+        // console.log(this);
+        const result = yield exports.User.findOne({ email: this.email });
+        if (result) {
+            throw new AppError_1.default(http_status_1.default.NOT_IMPLEMENTED, 'This email already used!');
+        }
+        else {
+            next();
+        }
     });
 });
 // removing password as result

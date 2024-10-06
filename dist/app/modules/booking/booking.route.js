@@ -10,7 +10,7 @@ const auth_1 = __importDefault(require("../../middlewares/auth"));
 const router = express_1.default.Router();
 // checking availability of time
 router.get('/check-availability', booking_controller_1.BookingController.checkAvailability);
-// creatign booking
+// creating booking
 router.post('/bookings', (0, auth_1.default)('user'), booking_controller_1.BookingController.createBooking);
 // getting all bookings
 router.get('/bookings', (0, auth_1.default)('admin'), booking_controller_1.BookingController.getAllBookings);
