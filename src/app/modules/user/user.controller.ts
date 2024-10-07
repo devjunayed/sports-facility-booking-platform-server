@@ -24,6 +24,8 @@ const getAllUser = catchAsync(async (req, res) => {
   })
 })
 const getSingleUser = catchAsync(async (req, res) => {
+  console.log(req.params.email)
+  console.log('hitting')
   const result = await UserServies.getSingleUserFromDb(req.params.email)
 
   sendResponse(res, {

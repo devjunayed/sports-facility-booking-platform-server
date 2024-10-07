@@ -20,7 +20,7 @@ const routes = [
     route: BookingRoutes,
   },
   {
-    path: '/',
+    path: '/user',
     route: UserRoutes,
   },
 ]

@@ -8,7 +8,12 @@ import { notFound } from './app/middlewares/notFound'
 const app: Application = express()
 
 // cors
-app.use(cors())
+app.use(cors({
+  origin: ['http://localhost:5173'],
+  methods: "GET, POST, PUT, DELETE",
+  credentials: true,
+  allowedHeaders: "Content-Type, Authorization"
+}))
 
 // middlewares for getting data from the frontend
 app.use(express.json())

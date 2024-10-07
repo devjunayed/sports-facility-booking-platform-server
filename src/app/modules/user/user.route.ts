@@ -5,7 +5,7 @@ import { UserController } from "./user.controller";
 const router = Router();
 
 
-router.get("/user", auth("admin"), UserController.getAllUser )
-router.get("/user/:email", auth("admin"), UserController.getSingleUser )
+router.get("/", auth("admin"), UserController.getAllUser )
+router.get("/:email", auth('admin', "user"), UserController.getSingleUser )
 
 export const UserRoutes = router;

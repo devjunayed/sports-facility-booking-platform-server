@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { Model } from 'mongoose'
 
-export type TRole = 'admin' | 'user'
+export type TRole = 'admin' | 'user' | ('admin' | "user")[];
 export type TUser = {
   _id?: string
   name: string
