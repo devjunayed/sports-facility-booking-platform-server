@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { TFacility } from './facility.interface'
 import { Facility } from './facility.model'
 
@@ -22,10 +23,30 @@ const deleteFacilityFromDB = async (id: string) => {
   const facility = await Facility.findById(id)
   return facility
 }
-const getAllFacilityFromDB = async () => {
-  // getting all facility data except deleted one
-  const result = await Facility.find({ isDeleted: { $ne: true } })
-  return result
+const getAllFacilityFromDB = async ({search = "",  minPrice = 0, maxPrice = Infinity}) => {
+  const query: any = { isDeleted: { $ne: true } };
+
+  if (search) {
+    query.$or = [
+      { name: { $regex: search, $options: "i" } },
+      { location: { $regex: search, $options: "i" } }
+    ];
+  }
+
+  
+
+  if (minPrice || maxPrice) {
+    query.pricePerHour = { $gte: minPrice, $lte: maxPrice };
+  }
+
+  const result = await Facility.find(query);
+  return result;
+};
+
+
+const getSingleFacilityFromDB = async(id: string) => {
+  const result = await Facility.findOne({_id: id});
+  return result;
 }
 
 export const FacilityService = {
@@ -33,4 +54,5 @@ export const FacilityService = {
   updateFacilityFromDB,
   deleteFacilityFromDB,
   getAllFacilityFromDB,
+  getSingleFacilityFromDB
 }

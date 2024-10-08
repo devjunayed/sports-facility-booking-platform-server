@@ -27,4 +27,8 @@ router.delete('/:id', auth('admin'), FacilityController.deleteFacility)
 // get all facility
 router.get('/', FacilityController.getAllFacility)
 
+
+// get single facility
+router.get('/:id', FacilityController.getSingleFAcility)
+
 export const FacilityRoutes = router

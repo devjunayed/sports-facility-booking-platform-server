@@ -7,7 +7,12 @@ import { User } from '../user/user.model'
 import { getSlot } from './booking.utils'
 
 // check availability
-const checkAvailabilityFromDb = async (date: string) => {
+const checkAvailabilityFromDb = async (
+  date: string,
+  facility: string,
+) => {
+
+
   // setting booking date to the current date if no date is provided
   let bookingDate = new Date().toISOString().slice(0, 10)
 
@@ -15,7 +20,7 @@ const checkAvailabilityFromDb = async (date: string) => {
     bookingDate = date
   }
 
-  const slots = await getSlot(bookingDate)
+  const slots = await getSlot(bookingDate, facility)
 
   return slots
 }
@@ -50,7 +55,7 @@ const createBookingIntoDB = async (req: Request) => {
   data.user = user?._id
 
   // checking if the slot is bookable
-  const slots = await getSlot(data.date)
+  const slots = await getSlot(data.date, `${facility._id}`)
 
   const slotAvailable = slots.some(
     (slot) =>

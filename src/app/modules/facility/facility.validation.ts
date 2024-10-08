@@ -6,6 +6,10 @@ const createFacilityValidationSchema = z.object({
       required_error: 'Facility name is required',
       invalid_type_error: 'Facility name is invalid',
     }),
+    image: z.string({
+      required_error: 'Facility image is required',
+      invalid_type_error: 'Facility image is invalid',
+    }),
     description: z.string({
       required_error: 'Facility description is required',
       invalid_type_error: 'Facility description is invalid',

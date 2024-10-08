@@ -1,9 +1,10 @@
 import { TSlot } from './booking.interface'
 import { Booking } from './booking.model'
 
-export async function getSlot(date: string) {
+export async function getSlot(date: string, facilityId: string) {
   // slots
   const slots: TSlot[] = []
+
 
   // Generating slots between 8:00am to 4:00pm with 2-hour intervals
   for (let i = 8; i < 16; i += 2) {
@@ -16,17 +17,25 @@ export async function getSlot(date: string) {
     })
   }
 
+
   // Fetch all bookings for the given date
   const bookings = await Booking.find({ date })
 
+
   // Filter out already booked slots
   const availableSlots = slots.filter((slot) => {
+    
+
+
     return !bookings.some(
       (booking) =>
         booking.startTime === slot.startTime &&
-        booking.endTime === slot.endTime,
+        booking.endTime === slot.endTime &&
+        `${booking.facility}` === facilityId
     )
   })
+
+
 
   // Return only available slots
   return availableSlots

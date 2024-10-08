@@ -8,6 +8,7 @@ import { Request } from 'express'
 const checkAvailability = catchAsync(async (req, res) => {
   const result = await BookingService.checkAvailabilityFromDb(
     req?.query?.date as string,
+    req?.query?.facility as string
   )
 
   sendResponse(res, {
