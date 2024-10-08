@@ -8,6 +8,7 @@ const createBookingValidationSchema = z.object({
   facility: z.string().min(1, 'Facility is required'),
   payableAmount: z.number().optional(),
   isBooked: z.enum(['confirmed', 'canceled']).default('confirmed'),
+  paymentStatus: z.enum(['Pending', 'Paid', "Canceled"]).default('Pending'),
 })
 
 export const BookingValidation = {

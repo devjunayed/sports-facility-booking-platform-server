@@ -32,6 +32,11 @@ const bookingSchema = new Schema<TBooking>({
     enum: ['confirmed', 'canceled'],
     default: 'confirmed',
   },
+  paymentStatus: {
+    type: String,
+    enum: ['Pending', 'Paid', "Canceled"],
+    default: 'Pending',
+  },
 })
 
 export const Booking = model<TBooking>('Booking', bookingSchema)

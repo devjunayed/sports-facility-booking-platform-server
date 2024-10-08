@@ -8,6 +8,7 @@ export type TBooking = {
   facility: string
   payableAmount: number
   isBooked: 'confirmed' | 'canceled'
+  paymentStatus: 'Pending' | 'Paid' | "Canceled"
 }
 
 export type TSlot = {

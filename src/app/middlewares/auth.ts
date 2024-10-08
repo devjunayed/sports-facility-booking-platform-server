@@ -38,11 +38,7 @@ const auth = (...requiredRoles: TRole[]) => {
 
     // checking if the user role is allowed
     if (requiredRoles && !requiredRoles.includes(role)) {
-      res.status(httpStatus.UNAUTHORIZED).json({
-        success: false,
-        statusCode: httpStatus.UNAUTHORIZED,
-        message: 'You have no access to this route',
-      })
+      throw new AppError(httpStatus.NOT_FOUND, 'You have no access to this route')
     }
     req.user = decoded as JwtPayload
     next()
