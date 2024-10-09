@@ -3,7 +3,7 @@ import { AuthRoutes } from '../modules/auth/auth.route'
 import { FacilityRoutes } from '../modules/facility/facility.route'
 import { BookingRoutes } from '../modules/booking/booking.route'
 import { UserRoutes } from '../modules/user/user.route'
-import { PaymentRoutes } from '../modules/payment/pyament.route'
+import { PaymentRoutes } from '../modules/payment/payment.route'
 
 const router = Router()
 

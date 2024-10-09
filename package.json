@@ -8,7 +8,7 @@
     "start:prod": "node ./dist/server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
-    "build": "tsc",
+    "build": "tsc && cp -R src/views dist/views",
     "lint": "npx eslint .",
     "lint:fix": "npx eslint src --fix",
     "prettier": "prettier --ignore-path .gitignore --write \"**/*.+(js|ts|json)\""
