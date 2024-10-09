@@ -9,22 +9,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UserServies = void 0;
-const user_model_1 = require("../user/user.model");
-const createUserIntoDB = (payload) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield user_model_1.User.create(payload);
-    return result;
+exports.paymentController = void 0;
+const payment_services_1 = require("./payment.services");
+const confirmation = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { transactionId, status } = req.query;
+    const result = yield payment_services_1.paymentSerivices.confirmationService(transactionId, status);
+    res.send(result);
 });
-const getAllUserFromDb = () => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield user_model_1.User.find();
-    return result;
-});
-const getSingleUserFromDb = (email) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield user_model_1.User.findOne({ email });
-    return result;
-});
-exports.UserServies = {
-    createUserIntoDB,
-    getAllUserFromDb,
-    getSingleUserFromDb
+exports.paymentController = {
+    confirmation
 };

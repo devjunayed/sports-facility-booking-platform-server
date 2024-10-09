@@ -12,4 +12,9 @@ export default {
   jwt_refresh_secret: process.env.JWT_REFRESH_SECRET,
   jwt_refresh_expires_in: process.env.JWT_REFRESH_EXPIRES_IN,
   nod_env: process.env.NODE_ENV,
+  payment_url: process.env.PAYMENT_URL,
+  store_id:process.env.STORE_ID,
+  signature: process.env.SIGNATURE_KEY,
+  store_pass: process.env.STORE_PASS,
+  server_api: process.env.SERVER_API
 }

@@ -26,6 +26,28 @@ const createUser = (0, catchAsync_1.catchAsync)((req, res) => __awaiter(void 0, 
         data: result,
     });
 }));
+const getAllUser = (0, catchAsync_1.catchAsync)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield user_service_1.UserServies.getAllUserFromDb();
+    (0, sendResponse_1.sendResponse)(res, {
+        success: true,
+        statusCode: http_status_1.default.OK,
+        message: 'All User retrieved successfully',
+        data: result,
+    });
+}));
+const getSingleUser = (0, catchAsync_1.catchAsync)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    console.log(req.params.email);
+    console.log('hitting');
+    const result = yield user_service_1.UserServies.getSingleUserFromDb(req.params.email);
+    (0, sendResponse_1.sendResponse)(res, {
+        success: true,
+        statusCode: http_status_1.default.OK,
+        message: 'User retrieved successfully',
+        data: result,
+    });
+}));
 exports.UserController = {
     createUser,
+    getAllUser,
+    getSingleUser
 };

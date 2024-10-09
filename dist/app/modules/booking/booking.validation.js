@@ -13,6 +13,7 @@ const createBookingValidationSchema = zod_1.default.object({
     facility: zod_1.default.string().min(1, 'Facility is required'),
     payableAmount: zod_1.default.number().optional(),
     isBooked: zod_1.default.enum(['confirmed', 'canceled']).default('confirmed'),
+    paymentStatus: zod_1.default.enum(['Pending', 'Paid', "Canceled"]).default('Pending'),
 });
 exports.BookingValidation = {
     createBookingValidationSchema,

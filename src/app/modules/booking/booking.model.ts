@@ -20,12 +20,16 @@ const bookingSchema = new Schema<TBooking>({
     ref: 'User',
   },
   facility: {
-    type: String,
+    type: Schema.Types.ObjectId,
     required: true,
     ref: 'Facility',
   },
   payableAmount: {
     type: Number,
+  },
+  transactionId: {
+    type: String,
+    required: true
   },
   isBooked: {
     type: String,

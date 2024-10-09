@@ -5,6 +5,7 @@ import AppError from '../../errors/AppError'
 import httpStatus from 'http-status'
 import { User } from '../user/user.model'
 import { getSlot } from './booking.utils'
+import { initiatePayment } from '../payment/payment.utils'
 
 // check availability
 const checkAvailabilityFromDb = async (
@@ -67,8 +68,28 @@ const createBookingIntoDB = async (req: Request) => {
     throw new AppError(httpStatus.NOT_ACCEPTABLE, 'Slot is not available!')
   }
 
-  const result = Booking.create(data)
-  return result
+
+  // Transaction id for creating payment
+  const transactionId = `TXN-${Date.now()}`;
+
+  data.transactionId = transactionId;
+
+  const result =  await Booking.create(data)
+
+
+// payment 
+const paymentData = {
+  transactionId,
+  totalPrice: payableAmount,
+  customerName : user!.name,
+  customerEmail: user!.email,
+  customerPhone: user!.phone,
+  customerAddress: user!.address
+}
+
+  const paymentSession = await initiatePayment(paymentData);
+  
+  return {result, paymentSession}
 }
 
 // getting all bookings

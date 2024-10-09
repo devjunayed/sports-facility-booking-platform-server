@@ -18,4 +18,6 @@ router.put('/:id', (0, auth_1.default)('admin'), (0, validateRequest_1.validateR
 router.delete('/:id', (0, auth_1.default)('admin'), facility_controller_1.FacilityController.deleteFacility);
 // get all facility
 router.get('/', facility_controller_1.FacilityController.getAllFacility);
+// get single facility
+router.get('/:id', facility_controller_1.FacilityController.getSingleFAcility);
 exports.FacilityRoutes = router;

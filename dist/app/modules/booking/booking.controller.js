@@ -19,8 +19,8 @@ const sendResponse_1 = require("../../utils/sendResponse");
 const booking_service_1 = require("./booking.service");
 // checking availabiliy in controllers
 const checkAvailability = (0, catchAsync_1.catchAsync)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    var _a;
-    const result = yield booking_service_1.BookingService.checkAvailabilityFromDb((_a = req === null || req === void 0 ? void 0 : req.query) === null || _a === void 0 ? void 0 : _a.date);
+    var _a, _b;
+    const result = yield booking_service_1.BookingService.checkAvailabilityFromDb((_a = req === null || req === void 0 ? void 0 : req.query) === null || _a === void 0 ? void 0 : _a.date, (_b = req === null || req === void 0 ? void 0 : req.query) === null || _b === void 0 ? void 0 : _b.facility);
     (0, sendResponse_1.sendResponse)(res, {
         success: true,
         statusCode: http_status_1.default.OK,

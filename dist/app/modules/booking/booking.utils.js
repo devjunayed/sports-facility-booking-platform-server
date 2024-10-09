@@ -11,7 +11,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getSlot = getSlot;
 const booking_model_1 = require("./booking.model");
-function getSlot(date) {
+function getSlot(date, facilityId) {
     return __awaiter(this, void 0, void 0, function* () {
         // slots
         const slots = [];
@@ -29,7 +29,8 @@ function getSlot(date) {
         // Filter out already booked slots
         const availableSlots = slots.filter((slot) => {
             return !bookings.some((booking) => booking.startTime === slot.startTime &&
-                booking.endTime === slot.endTime);
+                booking.endTime === slot.endTime &&
+                `${booking.facility}` === facilityId);
         });
         // Return only available slots
         return availableSlots;

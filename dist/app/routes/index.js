@@ -4,6 +4,8 @@ const express_1 = require("express");
 const auth_route_1 = require("../modules/auth/auth.route");
 const facility_route_1 = require("../modules/facility/facility.route");
 const booking_route_1 = require("../modules/booking/booking.route");
+const user_route_1 = require("../modules/user/user.route");
+const pyament_route_1 = require("../modules/payment/pyament.route");
 const router = (0, express_1.Router)();
 const routes = [
     {
@@ -18,6 +20,14 @@ const routes = [
         path: '/',
         route: booking_route_1.BookingRoutes,
     },
+    {
+        path: '/user',
+        route: user_route_1.UserRoutes,
+    },
+    {
+        path: "/payment",
+        route: pyament_route_1.PaymentRoutes
+    }
 ];
 routes.forEach((route) => router.use(route.path, route.route));
 exports.default = router;

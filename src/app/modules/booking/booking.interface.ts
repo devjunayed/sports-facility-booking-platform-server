@@ -5,7 +5,8 @@ export type TBooking = {
   startTime: string
   endTime: string
   user: Types.ObjectId
-  facility: string
+  facility: Types.ObjectId
+  transactionId: string
   payableAmount: number
   isBooked: 'confirmed' | 'canceled'
   paymentStatus: 'Pending' | 'Paid' | "Canceled"

@@ -11,7 +11,12 @@ const notFound_1 = require("./app/middlewares/notFound");
 // creating app
 const app = (0, express_1.default)();
 // cors
-app.use((0, cors_1.default)());
+app.use((0, cors_1.default)({
+    origin: ['http://localhost:5173', 'https://sportyfy.devjunayed.xyz'],
+    methods: "GET, POST, PUT, DELETE",
+    credentials: true,
+    allowedHeaders: "Content-Type, Authorization"
+}));
 // middlewares for getting data from the frontend
 app.use(express_1.default.json());
 // tes route

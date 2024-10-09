@@ -11,6 +11,10 @@ const createFacilityValidationSchema = zod_1.default.object({
             required_error: 'Facility name is required',
             invalid_type_error: 'Facility name is invalid',
         }),
+        image: zod_1.default.string({
+            required_error: 'Facility image is required',
+            invalid_type_error: 'Facility image is invalid',
+        }),
         description: zod_1.default.string({
             required_error: 'Facility description is required',
             invalid_type_error: 'Facility description is invalid',

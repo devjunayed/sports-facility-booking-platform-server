@@ -19,14 +19,15 @@ const AppError_1 = __importDefault(require("../../errors/AppError"));
 const http_status_1 = __importDefault(require("http-status"));
 const user_model_1 = require("../user/user.model");
 const booking_utils_1 = require("./booking.utils");
+const payment_utils_1 = require("../payment/payment.utils");
 // check availability
-const checkAvailabilityFromDb = (date) => __awaiter(void 0, void 0, void 0, function* () {
+const checkAvailabilityFromDb = (date, facility) => __awaiter(void 0, void 0, void 0, function* () {
     // setting booking date to the current date if no date is provided
     let bookingDate = new Date().toISOString().slice(0, 10);
     if (date) {
         bookingDate = date;
     }
-    const slots = yield (0, booking_utils_1.getSlot)(bookingDate);
+    const slots = yield (0, booking_utils_1.getSlot)(bookingDate, facility);
     return slots;
 });
 // creating bookings
@@ -51,14 +52,27 @@ const createBookingIntoDB = (req) => __awaiter(void 0, void 0, void 0, function*
     // setting user id
     data.user = user === null || user === void 0 ? void 0 : user._id;
     // checking if the slot is bookable
-    const slots = yield (0, booking_utils_1.getSlot)(data.date);
+    const slots = yield (0, booking_utils_1.getSlot)(data.date, `${facility._id}`);
     const slotAvailable = slots.some((slot) => slot.startTime === data.startTime && slot.endTime === data.endTime);
     // throwing error if slot is not available
     if (!slotAvailable) {
         throw new AppError_1.default(http_status_1.default.NOT_ACCEPTABLE, 'Slot is not available!');
     }
-    const result = booking_model_1.Booking.create(data);
-    return result;
+    // Transaction id for creating payment
+    const transactionId = `TXN-${Date.now()}`;
+    data.transactionId = transactionId;
+    const result = yield booking_model_1.Booking.create(data);
+    // payment 
+    const paymentData = {
+        transactionId,
+        totalPrice: payableAmount,
+        customerName: user.name,
+        customerEmail: user.email,
+        customerPhone: user.phone,
+        customerAddress: user.address
+    };
+    const paymentSession = yield (0, payment_utils_1.initiatePayment)(paymentData);
+    return { result, paymentSession };
 });
 // getting all bookings
 const getAllBookingsFromDB = () => __awaiter(void 0, void 0, void 0, function* () {

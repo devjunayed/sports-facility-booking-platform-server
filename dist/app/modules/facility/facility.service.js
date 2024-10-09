@@ -29,9 +29,22 @@ const deleteFacilityFromDB = (id) => __awaiter(void 0, void 0, void 0, function*
     const facility = yield facility_model_1.Facility.findById(id);
     return facility;
 });
-const getAllFacilityFromDB = () => __awaiter(void 0, void 0, void 0, function* () {
-    // getting all facility data except deleted one
-    const result = yield facility_model_1.Facility.find({ isDeleted: { $ne: true } });
+const getAllFacilityFromDB = (_a) => __awaiter(void 0, [_a], void 0, function* ({ search = "", minPrice = 0, maxPrice = Infinity }) {
+    const query = { isDeleted: { $ne: true } };
+    if (search) {
+        query.$or = [
+            { name: { $regex: search, $options: "i" } },
+            { location: { $regex: search, $options: "i" } }
+        ];
+    }
+    if (minPrice || maxPrice) {
+        query.pricePerHour = { $gte: minPrice, $lte: maxPrice };
+    }
+    const result = yield facility_model_1.Facility.find(query);
+    return result;
+});
+const getSingleFacilityFromDB = (id) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield facility_model_1.Facility.findOne({ _id: id });
     return result;
 });
 exports.FacilityService = {
@@ -39,4 +52,5 @@ exports.FacilityService = {
     updateFacilityFromDB,
     deleteFacilityFromDB,
     getAllFacilityFromDB,
+    getSingleFacilityFromDB
 };
